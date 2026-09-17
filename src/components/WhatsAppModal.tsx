@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MessageCircle, Phone, Calendar, Clock, X, CheckCircle2, Sparkles, Send } from 'lucide-react';
 
 interface WhatsAppModalProps {
@@ -17,6 +17,15 @@ export default function WhatsAppModal({
   const [preferredDay, setPreferredDay] = useState('Earliest Available');
   const [notes, setNotes] = useState('');
 
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const handleLaunchWhatsApp = (e: React.FormEvent) => {
@@ -30,7 +39,11 @@ export default function WhatsAppModal({
       (notes.trim() ? `\n• Notes: ${notes.trim()}` : '')
     );
     const waUrl = `https://wa.me/${clinicPhone}?text=${message}`;
-    window.open(waUrl, '_blank', 'noopener,noreferrer');
+    const openedWindow = window.open(waUrl, '_blank', 'noopener,noreferrer');
+    if (!openedWindow || openedWindow.closed || typeof openedWindow.closed === 'undefined') {
+      // Fallback if popup blocker intercepted window.open
+      window.location.assign(waUrl);
+    }
     onClose();
   };
 
