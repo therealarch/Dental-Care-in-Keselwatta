@@ -272,19 +272,11 @@ const PrismaticBurst = ({
     if (!container) return;
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    let renderer: any = null;
-    try {
-      renderer = new Renderer({
-        dpr,
-        alpha: false,
-        antialias: false
-      });
-    } catch {
-      return;
-    }
-    if (!renderer || !renderer.gl || !renderer.gl.canvas) {
-      return;
-    }
+    const renderer = new Renderer({
+      dpr,
+      alpha: false,
+      antialias: false
+    });
     rendererRef.current = renderer;
 
     const gl = renderer.gl;
@@ -339,18 +331,13 @@ const PrismaticBurst = ({
     meshRef.current = mesh;
 
     const resize = () => {
-      if (!renderer || !program || !gl) return;
       const w = container.clientWidth || 1;
       const h = container.clientHeight || 1;
       renderer.setSize(w, h);
-      if (program.uniforms?.uResolution) {
-        program.uniforms.uResolution.value = [gl.drawingBufferWidth, gl.drawingBufferHeight];
-      }
-      if (program.uniforms?.uOffset) {
-        const ox = toPx(offsetRef.current?.x, gl.drawingBufferWidth, dpr);
-        const oy = toPx(offsetRef.current?.y, gl.drawingBufferHeight, dpr);
-        program.uniforms.uOffset.value = [ox, oy];
-      }
+      program.uniforms.uResolution.value = [gl.drawingBufferWidth, gl.drawingBufferHeight];
+      const ox = toPx(offsetRef.current?.x, gl.drawingBufferWidth, dpr);
+      const oy = toPx(offsetRef.current?.y, gl.drawingBufferHeight, dpr);
+      program.uniforms.uOffset.value = [ox, oy];
     };
 
     let ro: ResizeObserver | null = null;
@@ -423,12 +410,10 @@ const PrismaticBurst = ({
       if (!ro) window.removeEventListener('resize', resize);
       io?.disconnect();
       document.removeEventListener('visibilitychange', onVis);
-      if (gl?.canvas && container.contains(gl.canvas)) {
-        try {
-          container.removeChild(gl.canvas);
-        } catch {
-          // ignore
-        }
+      try {
+        container.removeChild(gl.canvas);
+      } catch {
+        console.warn('Canvas already removed');
       }
       try {
         meshRef.current?.remove?.();

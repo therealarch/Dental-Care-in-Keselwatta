@@ -41,26 +41,14 @@ export default function App() {
       const target = (e.target as HTMLElement)?.closest('a');
       if (!target) return;
       const href = target.getAttribute('href');
-      if (!href) return;
-
-      if (href === '#' || href === '#top') {
-        e.preventDefault();
-        lenis.scrollTo(0, { duration: 1.2 });
-        return;
-      }
-
-      if (href.startsWith('#') && href.length > 1) {
-        try {
-          const el = document.querySelector(href);
-          if (el) {
-            e.preventDefault();
-            lenis.scrollTo(el as HTMLElement, {
-              offset: -64,
-              duration: 1.2,
-            });
-          }
-        } catch {
-          // Ignore invalid selector, allow standard browser navigation
+      if (href && href.startsWith('#') && href.length > 1) {
+        const el = document.querySelector(href);
+        if (el) {
+          e.preventDefault();
+          lenis.scrollTo(el as HTMLElement, {
+            offset: -64,
+            duration: 1.2,
+          });
         }
       }
     };

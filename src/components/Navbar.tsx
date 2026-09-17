@@ -17,7 +17,7 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
         {/* Brand Logo & Name */}
         <a
           id="brand-logo-link"
-          href="#hero-section"
+          href="#"
           className="flex items-center gap-2.5 group focus:outline-none"
         >
           <div className="w-9 h-9 rounded-sm bg-[#533afd] flex items-center justify-center text-white shadow-none group-hover:scale-105 transition-transform">
