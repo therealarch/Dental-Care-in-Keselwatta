@@ -1,0 +1,8 @@
+{
+  "name": "Dental Care in Keselwatta",
+  "description": "Comprehensive dental services from routine checkups to advanced oral surgery with modern, patient-centered care.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

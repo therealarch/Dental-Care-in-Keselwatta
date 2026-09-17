@@ -1,0 +1,54 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+@layer base {
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-feature-settings: "ss01" 1, "cv02" 1;
+    color: #0d253d;
+    background-color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+.tnum {
+  font-feature-settings: "tnum" 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Atmospheric Stripe-style gradient mesh for upper hero */
+.stripe-mesh-gradient {
+  background: 
+    radial-gradient(ellipse 75% 60% at 75% 10%, rgba(83, 58, 253, 0.20) 0%, rgba(83, 58, 253, 0) 70%),
+    radial-gradient(ellipse 60% 50% at 15% 5%, rgba(245, 233, 212, 0.85) 0%, rgba(245, 233, 212, 0) 70%),
+    radial-gradient(ellipse 50% 45% at 90% 35%, rgba(234, 34, 97, 0.12) 0%, rgba(234, 34, 97, 0) 65%),
+    radial-gradient(ellipse 65% 55% at 45% -10%, rgba(185, 185, 249, 0.40) 0%, rgba(185, 185, 249, 0) 70%),
+    radial-gradient(ellipse 45% 40% at 5% 45%, rgba(155, 104, 41, 0.09) 0%, rgba(155, 104, 41, 0) 65%),
+    #ffffff;
+}
+
+/* Luminous light accent gradient mesh: mostly white with a delicate hint of purple and lavender */
+.stripe-card-gradient {
+  background:
+    radial-gradient(ellipse 75% 65% at 15% 15%, rgba(185, 185, 249, 0.32) 0%, rgba(185, 185, 249, 0) 65%),
+    radial-gradient(ellipse 65% 55% at 85% 20%, rgba(102, 94, 253, 0.14) 0%, rgba(102, 94, 253, 0) 60%),
+    radial-gradient(ellipse 60% 50% at 50% 85%, rgba(249, 107, 238, 0.08) 0%, rgba(249, 107, 238, 0) 55%),
+    radial-gradient(ellipse 80% 60% at 85% 85%, rgba(185, 185, 249, 0.22) 0%, rgba(185, 185, 249, 0) 65%),
+    linear-gradient(180deg, #ffffff 0%, #fafbff 100%);
+}
+
+/* Stripe-inspired subtle dot matrix pattern */
+.stripe-dots-pattern {
+  background-image: radial-gradient(#e3e8ee 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Grid style clean flat elevation - zero drop shadows as requested */
+.stripe-shadow-sm,
+.stripe-shadow-card,
+.stripe-shadow-lift,
+.stripe-btn-primary,
+.stripe-btn-primary:hover {
+  box-shadow: none !important;
+}
